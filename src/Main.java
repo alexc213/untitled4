@@ -4,8 +4,6 @@ public class Main {
     private static ArrayList<SimpleMovie> movies = MovieDatabaseBuilder.getMovieDB("src/movie_data");
     public static void main(String[] args) {
 
-
-
         ArrayList<ArrayList<ArrayList<String>>> answerKey = new ArrayList<>();
         ArrayList<ArrayList<String>> baconMovies = new ArrayList<>();
         ArrayList<SimpleMovie> baconMoviesList = new ArrayList<>();
@@ -17,23 +15,46 @@ public class Main {
                     block.add(null);
                     block.add(movie.getTitle());
                     baconMoviesList.add(movie);
-
                     baconMovies.add(block);
                 }
             }
         }
         answerKey.add(baconMovies);
-        for(SimpleMovie movie : baconMoviesList){
-            movies.remove(movie);
-            for(String actor : movie.getActors()){
-
+        //baconMoviesList.size()>0
+        //for(int i = 0;i<=1;i++) {
+            baconMovies.clear();
+            for(SimpleMovie movie : baconMoviesList){
+                movies.remove(movie);
             }
-        }
-        System.out.println(answerKey);
+            ArrayList<SimpleMovie> tempBaconMoviesList = new ArrayList<>();
+            for (SimpleMovie movie : baconMoviesList) {
+                for (String actor : movie.getActors()) {
+                    for (SimpleMovie movie1 : moviesWithActor(actor)) {
+                        ArrayList<String> tempBlock = new ArrayList<>();
+                        tempBlock.add(actor);
+                        tempBlock.add(movie.getTitle());
+                        tempBlock.add(movie1.getTitle());
+                        tempBaconMoviesList.add(movie1);
+                        baconMovies.add(tempBlock);
+                    }
+                }
+            }
+            answerKey.add(baconMovies);
+            baconMoviesList.clear();
+            System.out.println("Progress");
+            for (SimpleMovie movie : tempBaconMoviesList) {
+                baconMoviesList.add(movie);
+            }
+        //}
+        System.out.println(answerKey.size());
+        System.out.println(answerKey.get(0).size());
+        System.out.println(answerKey.get(1).size());
+        //System.out.println(answerKey.get(2).size());
+        System.out.println(movies.size());
 
 
     }
-    public ArrayList<SimpleMovie> moviesWithActor(String actor){
+    public static ArrayList<SimpleMovie> moviesWithActor(String actor){
         ArrayList<SimpleMovie> moviesWithActor = new ArrayList<>();
         for(SimpleMovie movie : movies){
             if(movie.getActors().contains(actor)){
