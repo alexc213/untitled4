@@ -20,6 +20,7 @@ public class Main {
             }
         }
         answerKey.add(baconMovies);
+        System.out.println(answerKey.get(0).size());
         //baconMoviesList.size()>0
         //for(int i = 0;i<=1;i++) {
             baconMovies.clear();
