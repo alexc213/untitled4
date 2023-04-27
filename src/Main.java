@@ -20,10 +20,10 @@ public class Main {
             }
         }
         answerKey.add(baconMovies);
-        System.out.println(answerKey.get(0).size());
+
         //baconMoviesList.size()>0
-        //for(int i = 0;i<=1;i++) {
-            baconMovies.clear();
+        for(int i = 0;i<=1;i++) {
+            ArrayList<ArrayList<String>> reference = new ArrayList<>();
             for(SimpleMovie movie : baconMoviesList){
                 movies.remove(movie);
             }
@@ -36,21 +36,22 @@ public class Main {
                         tempBlock.add(movie.getTitle());
                         tempBlock.add(movie1.getTitle());
                         tempBaconMoviesList.add(movie1);
-                        baconMovies.add(tempBlock);
+                        reference.add(tempBlock);
                     }
                 }
             }
-            answerKey.add(baconMovies);
+
+            answerKey.add(reference);
             baconMoviesList.clear();
-            System.out.println("Progress");
+            //System.out.println("Progress");
             for (SimpleMovie movie : tempBaconMoviesList) {
                 baconMoviesList.add(movie);
             }
-        //}
+        }
         System.out.println(answerKey.size());
         System.out.println(answerKey.get(0).size());
         System.out.println(answerKey.get(1).size());
-        //System.out.println(answerKey.get(2).size());
+        System.out.println(answerKey.get(2).size());
         System.out.println(movies.size());
 
 
