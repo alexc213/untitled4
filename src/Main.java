@@ -21,7 +21,7 @@ public class Main {
         }
         answerKey.add(baconMovies);
         for (SimpleMovie movie : baconMoviesList) {
-            movies.remove(movie);
+            remove(movie);
         }
         //baconMoviesList.size()>0
         for(int i = 0;i<=1;i++) {
@@ -48,7 +48,7 @@ public class Main {
             //System.out.println("Progress");
             for (SimpleMovie movie : tempBaconMoviesList) {
                 baconMoviesList.add(movie);
-                movies.remove(movie);
+                remove(movie);
             }
         }
         System.out.println(answerKey.size());
@@ -86,6 +86,13 @@ public class Main {
             }
         }
         return -1;
+    }
+
+    public void remove(SimpleMovie movie){
+        int x = bSearch(0,movies.size()-1,movie);
+        if(x != -1){
+            movies.remove(x);
+        }
     }
 
 
