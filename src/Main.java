@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class Main {
-    private static ArrayList<SimpleMovie> movies = MovieDatabaseBuilder.getMovieDB("src/movie_data");
+    private static ArrayList<SimpleMovie> movies = MovieDatabaseBuilder.getMovieDB("src/movie_data2");
     public static void main(String[] args) {
-
+        movies.sort(null);
         ArrayList<ArrayList<ArrayList<String>>> answerKey = new ArrayList<>();
         ArrayList<ArrayList<String>> baconMovies = new ArrayList<>();
         ArrayList<SimpleMovie> baconMoviesList = new ArrayList<>();
@@ -20,13 +20,15 @@ public class Main {
             }
         }
         answerKey.add(baconMovies);
-
+        for (SimpleMovie movie : baconMoviesList) {
+            movies.remove(movie);
+        }
         //baconMoviesList.size()>0
         for(int i = 0;i<=1;i++) {
             ArrayList<ArrayList<String>> reference = new ArrayList<>();
-            for(SimpleMovie movie : baconMoviesList){
-                movies.remove(movie);
-            }
+//            for(SimpleMovie movie : baconMoviesList){
+//                movies.remove(movie);
+//            }
             ArrayList<SimpleMovie> tempBaconMoviesList = new ArrayList<>();
             for (SimpleMovie movie : baconMoviesList) {
                 for (String actor : movie.getActors()) {
@@ -46,12 +48,16 @@ public class Main {
             //System.out.println("Progress");
             for (SimpleMovie movie : tempBaconMoviesList) {
                 baconMoviesList.add(movie);
+                movies.remove(movie);
             }
         }
         System.out.println(answerKey.size());
         System.out.println(answerKey.get(0).size());
+        System.out.println(answerKey.get(0));
         System.out.println(answerKey.get(1).size());
+        System.out.println(answerKey.get(1));
         System.out.println(answerKey.get(2).size());
+        System.out.println(answerKey.get(2));
         System.out.println(movies.size());
 
 
@@ -68,15 +74,15 @@ public class Main {
 
 
 
-    public int bSearch(int[] arr, int left, int right, int target) {
+    public static int bSearch(int left, int right, SimpleMovie target) {
         if (right >= left) {
             int mid = (left + right) / 2;
-            if (arr[mid] == target) {
+            if (movies.get(mid) == target) {
                 return mid;
-            } else if (arr[mid] > target) {
-                return bSearch(arr, left, mid - 1, target);
+            } else if (movies.get(mid).compareTo(target) > 0) {
+                return bSearch(left, mid - 1, target);
             } else {
-                return bSearch(arr, mid + 1, right, target);
+                return bSearch(mid + 1, right, target);
             }
         }
         return -1;
